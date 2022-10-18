@@ -10,7 +10,7 @@ class RestApi
         'x-apikey': "-------",
         'cache-control': "no-cache"
       }
-    end    
+    end
 
     def string_between(string="",from="",to="")
 
@@ -31,12 +31,12 @@ class RestApi
 
       zillow_url = "https://www.zillowstatic.com/autocomplete/v3/suggestions?q="+address+"&clientId=static-search-page"
 
-     
+
       response = RestClient::Request.execute(
           method: :get,
           url: zillow_url,
         ).body
-        
+
         result = JSON.parse(response)
 
 
@@ -73,7 +73,7 @@ class RestApi
           url: api_url,
           headers: { "Content-type" => "application/json" },
         ).body
-        
+
         result = JSON.parse(response)
 
         html = result['result']['html']
@@ -92,13 +92,13 @@ class RestApi
           temp = html.split('<span data-testid="bed-bath-beyond">', -1)
           temp2 = temp[1].split('</div>', -1)
           temp3 = temp2[0].split('<span class="Text-c11n-8-73-0__sc-aiai24-0 kHeRng">',-1)
-=end          
+=end
           bedroom=""
           bathroom=""
           sqft=""
           a = 1
           while a < temp3.length()
-           
+
             item = temp3[a].split("span class")
 
             #has = has +"------"+item[0]
@@ -174,15 +174,9 @@ class RestApi
         object = Zillow.new(:address => address, :status => status, :bedrooms => bedroom, :bathrooms => bathroom, :sqft => sqft, :zestimate => zestimate, :rent_zestimate => rent_zestimate, :property_type => type, :year_built => year_built, :heating => heating, :cooling => cooling, :parking => parking, :lot => lot, :basement => basement, :flooring => flooring, :appliances => appliances, :fireplace => fireplace, :parking_feature => parking_feature, :parcel_number => parcel_number, :exterior_feature => exterior_feature, :construction_material => construction_material, :foundation => foundation, :roof => roof, :region => region )
         object.save
 
-        res = { address: address, status: status, bedroom: bedroom, bathroom: bathroom, sqft:sqft, zestimate: zestimate, rent_zestimate: rent_zestimate} 
-        
+        res = { address: address, status: status, bedroom: bedroom, bathroom: bathroom, sqft:sqft, zestimate: zestimate, rent_zestimate: rent_zestimate, property_type: type, year_built: year_built, heating: heating, cooling: cooling, parking: parking, lot: lot, basement: basement, flooring: flooring, appliances: appliances, fireplace: fireplace, parking_feature: parking_feature, parcel_number: parcel_number, exterior_feature: exterior_feature, construction_material: construction_material, foundation: foundation, roof: roof, region: region}
+
         return res
-        
+
     end
 end
-
-
-
- 
-
-
