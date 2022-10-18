@@ -1,0 +1,2 @@
+class Zillow < ApplicationRecord
+end
